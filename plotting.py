@@ -252,78 +252,84 @@ def make_vae_plots(vae, x, y, outputs, training_data, validation_data, tmp_img="
     os.remove(tmp_img)
 
 def make_plasma_vae_plots(vae, x, outputs, training_data, validation_data,
-                          tmp_img="tmp_plasma_vae_out.png", figsize=(16, 14)):
+                          tmp_img="tmp_vae_out.png", figsize=(18, 12)):
 
-    fig, axes = plt.subplots(3, 2, figsize=figsize)
+    px = outputs["px"]       # Bernoulli distribution
+    qz = outputs["qz"]
+    z = outputs["z"]         # latent samples
 
-    # --------------------------------------------
-    # 1. Show input batch
-    # --------------------------------------------
-    axes[0, 0].set_title("Input Samples")
-    x_cpu = x.to("cpu")
-    grid = make_grid(x_cpu, nrow=4, normalize=True).permute(1, 2, 0)
-    axes[0, 0].imshow(grid)
+
+    x = x.detach().cpu()
+    reconstruction = px.detach().cpu()
+    z = z.detach().cpu()
+
+    B, C, H, W = x.shape
+
+    fig, axes = plt.subplots(2, 3, figsize=figsize)
+
+    # ---------------------------------------------------------
+    # 1. Show one input image
+    # ---------------------------------------------------------
+    axes[0, 0].set_title("Input (first sample)")
+    img = x[0, 0].numpy().T[::-1, :]   # transpose + flip vertically
+    axes[0, 0].imshow(img, cmap='rocket')
     axes[0, 0].axis("off")
 
-    # --------------------------------------------
-    # 2. Show reconstruction samples
-    # --------------------------------------------
-    axes[0, 1].set_title("Reconstruction Samples")
-    px = outputs["px"]
-    x_hat = px.sample().to("cpu")
-    grid_hat = make_grid(x_hat, nrow=4, normalize=True).permute(1, 2, 0)
-    axes[0, 1].imshow(grid_hat)
+    # ---------------------------------------------------------
+    # 2. Show reconstruction
+    # ---------------------------------------------------------
+    axes[0, 1].set_title("Reconstruction (first sample)")
+    img_hat = reconstruction[0, 0].numpy().T[::-1, :]
+    axes[0, 1].imshow(img_hat, cmap='rocket')
     axes[0, 1].axis("off")
 
-    # --------------------------------------------
-    # 3. Plot ELBO
-    # --------------------------------------------
+    # ---------------------------------------------------------
+    # 3. Latent space (if dim=2)
+    # ---------------------------------------------------------
+    if z.shape[1] == 2:
+        axes[0, 2].set_title("Latent space")
+        axes[0, 2].scatter(z[:, 0], z[:, 1], s=10, alpha=0.6)
+        axes[0, 2].set_xlabel("z1")
+        axes[0, 2].set_ylabel("z2")
+    else:
+        axes[0, 2].set_title("Latent space (dim > 2)")
+        axes[0, 2].text(0.5, 0.5, "Latent dim > 2", ha="center", va="center")
+        axes[0, 2].axis("off")
+
+    # ---------------------------------------------------------
+    # 4. ELBO
+    # ---------------------------------------------------------
     ax = axes[1, 0]
     ax.set_title("ELBO")
-    ax.plot(training_data["elbo"], label="Training")
-    ax.plot(validation_data["elbo"], label="Validation")
+    ax.plot(training_data["elbo"], label="train")
+    ax.plot(validation_data["elbo"], label="val")
     ax.legend()
 
-    # --------------------------------------------
-    # 4. Plot KL
-    # --------------------------------------------
+    # ---------------------------------------------------------
+    # 5. KL
+    # ---------------------------------------------------------
     ax = axes[1, 1]
-    ax.set_title("KL divergence")
-    ax.plot(training_data["kl"], label="Training")
-    ax.plot(validation_data["kl"], label="Validation")
+    ax.set_title("KL")
+    ax.plot(training_data["kl"], label="train")
+    ax.plot(validation_data["kl"], label="val")
     ax.legend()
 
-    # --------------------------------------------
-    # 5. Plot log_px
-    # --------------------------------------------
-    ax = axes[2, 0]
-    ax.set_title("log p(x|z)")
-    ax.plot(training_data["log_px"], label="Training")
-    ax.plot(validation_data["log_px"], label="Validation")
+    # ---------------------------------------------------------
+    # 6. log p(x|z)
+    # ---------------------------------------------------------
+    ax = axes[1, 2]
+    ax.set_title("log p(x | z)")
+    ax.plot(training_data["log_px"], label="train")
+    ax.plot(validation_data["log_px"], label="val")
     ax.legend()
 
-    # --------------------------------------------
-    # 6. Latent space visualization
-    # --------------------------------------------
-    ax = axes[2, 1]
-    ax.set_title("Latent Samples")
-
-    z = outputs["z"].to("cpu")
-
-    if z.shape[1] == 2:
-        # direct scatter
-        ax.scatter(z[:, 0], z[:, 1], s=8)
-    else:
-        # use t-SNE if latent dim > 2
-        z_emb = TSNE(n_components=2).fit_transform(z)
-        ax.scatter(z_emb[:, 0], z_emb[:, 1], s=8)
-
-    ax.set_xlabel("dim 1")
-    ax.set_ylabel("dim 2")
-
-    # Finish
+    # ---------------------------------------------------------
+    # Finalize and show
+    # ---------------------------------------------------------
     plt.tight_layout()
     plt.savefig(tmp_img)
     plt.close(fig)
+
     display(Image(filename=tmp_img))
     clear_output(wait=True)
+    os.remove(tmp_img)
