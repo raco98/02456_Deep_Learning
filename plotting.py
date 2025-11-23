@@ -260,7 +260,7 @@ def make_plasma_vae_plots(vae, x, outputs, training_data, validation_data,
 
 
     x = x.detach().cpu()
-    reconstruction = px.detach().cpu()
+    reconstruction = px.mean.detach().cpu()
     z = z.detach().cpu()
 
     B, C, H, W = x.shape
