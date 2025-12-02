@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torchvision.utils import make_grid
 from sklearn.decomposition import PCA
+from IPython.display import display, clear_output
 
 def plot_training_curves(training_data, validation_data):
     """
@@ -47,6 +48,68 @@ def plot_training_curves(training_data, validation_data):
     
     plt.tight_layout()
     plt.show()
+
+
+def visualize_reconstructions_live(model, data_loader, device, epoch: int, num_samples: int = 3, cmap: str = 'jet', transpose: bool = True):
+    """
+    Live update of original images and reconstructions for notebook training.
+
+    Intended to be called from the training loop every N epochs (e.g., if epoch % 10 == 0).
+
+    Args:
+        model (nn.Module): trained or training VAE model.
+        data_loader (DataLoader): DataLoader for validation/test set.
+        device (torch.device): device to run model on.
+        epoch (int): current epoch (used for title).
+        num_samples (int): number of examples to show side-by-side.
+        cmap (str): matplotlib colormap to use (e.g., 'jet').
+        transpose (bool): whether to apply the same transpose used elsewhere to match orientation.
+    """
+    model.eval()
+    try:
+        batch = next(iter(data_loader))
+    except StopIteration:
+        return
+
+    x = batch[0] if isinstance(batch, (list, tuple)) else batch
+    x = x[:num_samples].to(device)
+
+    with torch.no_grad():
+        outputs = model(x)
+        px = outputs['px']
+        x_hat = px.mean
+
+    x_np = x.cpu().numpy()
+    x_hat_np = x_hat.cpu().numpy()
+
+    fig, axes = plt.subplots(2, num_samples, figsize=(num_samples * 3, 6))
+    if num_samples == 1:
+        axes = axes.reshape(2, 1)
+
+    for i in range(num_samples):
+        img_orig = x_np[i, 0]
+        if transpose:
+            img_orig = img_orig.T[::-1, :]
+
+        axes[0, i].imshow(img_orig, cmap=cmap, vmin=0.0, vmax=1.0)
+        axes[0, i].set_title(f"Orig #{i}")
+        axes[0, i].axis('off')
+
+        img_recon = x_hat_np[i, 0]
+        if transpose:
+            img_recon = img_recon.T[::-1, :]
+
+        axes[1, i].imshow(img_recon, cmap=cmap, vmin=0.0, vmax=1.0)
+        axes[1, i].set_title(f"Recon #{i}")
+        axes[1, i].axis('off')
+
+    fig.suptitle(f"Epoch {epoch}: Original (top) vs Reconstruction (bottom)")
+    plt.tight_layout()
+
+    # Clear previous output and display the new figure (works in notebooks)
+    clear_output(wait=True)
+    display(fig)
+    plt.close(fig)
 
 def visualize_reconstructions(model, data_loader, device, num_samples=5, transpose=True):
     """
