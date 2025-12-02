@@ -5,13 +5,15 @@ from torchvision.utils import make_grid
 from sklearn.decomposition import PCA
 from IPython.display import display, clear_output
 
-def plot_training_curves(training_data, validation_data):
+def plot_training_curves(training_data, validation_data, save_path=None):
     """
     Plots the training and validation curves for ELBO, Log Likelihood, and KL Divergence.
     
     Args:
         training_data (dict): Dictionary containing lists of training metrics.
         validation_data (dict): Dictionary containing lists of validation metrics.
+        save_path (str, optional): Path to save the plots (without extension). 
+                                   If provided, saves as both .pdf and .png.
     """
     fig, axes = plt.subplots(1, 3, figsize=(18, 5))
     
@@ -47,6 +49,36 @@ def plot_training_curves(training_data, validation_data):
         axes[2].grid(True)
     
     plt.tight_layout()
+    
+    if save_path:
+        # Save combined plot
+        plt.savefig(f"{save_path}_combined.pdf")
+        plt.savefig(f"{save_path}_combined.png")
+        
+        # Save individual plots
+        metrics = [
+            ('elbo', 'ELBO', 'ELBO'),
+            ('log_px', 'Log Likelihood (Reconstruction)', None),
+            ('kl', 'KL Divergence', None)
+        ]
+        
+        for key, title, ylabel in metrics:
+            if key in training_data:
+                plt.figure(figsize=(8, 6))
+                plt.plot(training_data[key], label='Train')
+                if key in validation_data:
+                    plt.plot(validation_data[key], label='Validation')
+                plt.title(title)
+                plt.xlabel('Epoch')
+                if ylabel:
+                    plt.ylabel(ylabel)
+                plt.legend()
+                plt.grid(True)
+                plt.tight_layout()
+                plt.savefig(f"{save_path}_{key}.pdf")
+                plt.savefig(f"{save_path}_{key}.png")
+                plt.close()
+        
     plt.show()
 
 
