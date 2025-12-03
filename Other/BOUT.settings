@@ -1,0 +1,440 @@
+append = true		# type: bool, doc: Add new outputs to the end of existing files? If false, overwrite files.
+async_send = false		# type: bool, doc: Whether to use asyncronous MPI sends
+datadir = /home/alec/sophia_data/tcv/76142/./run/1e21/		# type: string
+dump_format = nc		# type: string
+dump_on_restart = false		# type: bool, doc: Write initial state as time point 0?
+incintshear = false		# type: bool
+mxg = 1		# type: int, doc: Number of guard cells on each side in X
+myg = 0		# type: int, doc: Number of guard cells on each side in Y
+non_uniform = true		# type: bool
+nout = 91		# type: int, doc: Number of output steps
+optionfile = BOUT.inp		# type: string
+periodicx = false		# type: bool, doc: Make grid periodic in X?
+restart = true		# type: bool, doc: Load state from restart files?
+restart_format = nc		# type: string
+settingsfile = BOUT.settings		# type: string
+stopcheck = false		# type: bool, doc: Check if a file exists, and exit if it does.
+t_end = timestep*nout		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+timestep = 100		# type: BoutReal, doc: Output time step size
+twistshift = false		# type: bool, doc: Apply a Twist-Shift boundary using ShiftAngle?
+wall_limit = -1		# type: BoutReal, doc: Wall time limit in hours. By default (< 0), no limit
+zmax = 1		# type: BoutReal
+zmin = 0		# type: BoutReal
+
+[all]
+bndry_all = neumann		# type: string
+evolve_bndry = false		# type: bool
+function = 0.0		# type: string
+scale = 0.0		# type: BoutReal
+
+[fast_output]
+dump_ext = nc		# type: string
+enabled = true		# type: bool
+floats = false		# type: bool
+flush = true		# type: bool
+flushfrequency = 100		# type: int
+frequency_multiplier = 100		# type: int
+guards = true		# type: bool
+init_missing = false		# type: bool
+openclose = true		# type: bool
+parallel = false		# type: bool
+prefix = BOUT.fast		# type: string
+shiftinput = false		# type: bool
+shiftoutput = false		# type: bool
+type = monitor		# type: string
+xpos0 = 0.2		# type: BoutReal
+xpos1 = 0.3		# type: BoutReal
+xpos2 = 0.4		# type: BoutReal
+xpos3 = 0.5		# type: BoutReal
+xpos4 = 0.6		# type: BoutReal
+xpos5 = 0.7		# type: BoutReal
+xpos6 = 0.8		# type: BoutReal
+xpos7 = -1		# type: BoutReal
+ypos0 = 0		# type: BoutReal
+ypos1 = 0		# type: BoutReal
+ypos2 = 0		# type: BoutReal
+ypos3 = 0		# type: BoutReal
+ypos4 = 0		# type: BoutReal
+ypos5 = 0		# type: BoutReal
+ypos6 = 0		# type: BoutReal
+ypos7 = -1		# type: BoutReal
+zpos0 = 0.5		# type: BoutReal
+zpos1 = 0.5		# type: BoutReal
+zpos2 = 0.5		# type: BoutReal
+zpos3 = 0.5		# type: BoutReal
+zpos4 = 0.5		# type: BoutReal
+zpos5 = 0.5		# type: BoutReal
+zpos6 = 0.5		# type: BoutReal
+zpos7 = -1		# type: BoutReal
+
+[fft]
+fft_measure = false		# type: bool, doc: Perform speed measurements to optimise settings?
+
+[hesel]
+a = 2		# type: BoutReal
+bracket_method = 2		# type: int
+bt = 1.11		# type: BoutReal
+collisional_model = 2		# type: int
+compact_output = false		# type: bool
+d_force = 2
+d_lcfs = 2
+d_wall = 2
+diag_particle_flux = true		# type: bool
+diag_thermal = 15		# type: int
+diagnostics = true		# type: bool
+diffusion_coeff = 1		# type: int
+double_curvature_coeff = false		# type: bool
+edge_width = x_lcfs*mesh:lx
+floor_n = 0.005		# type: BoutReal
+floor_pe = 0.000025		# type: BoutReal
+floor_pi = 0.000025		# type: BoutReal
+floor_profiles = false		# type: bool
+floor_time = 50		# type: BoutReal
+force_profiles = true		# type: bool
+force_time = 50		# type: BoutReal
+force_width = 0.5 * edge_width
+h_mode = false		# type: bool
+hyper_dc_n = 1		# type: BoutReal
+hyper_dc_pe = 1		# type: BoutReal
+hyper_dc_pi = 1		# type: BoutReal
+hyper_dc_vort = 1		# type: BoutReal
+hyper_order = 4		# type: int
+init_zero_potential = false		# type: bool
+input_sources = false		# type: bool
+interchange_dynamics = true		# type: bool
+invert_w_star = false		# type: bool
+kinetic_plasma_neutral_interactions = 0		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+lblob = -1		# type: BoutReal
+lc_from_grid = false		# type: bool
+lconn = 20		# type: Field2D
+mach = 0.5		# type: BoutReal
+n0 = 1.85e+19		# type: BoutReal
+n_bck = 0		# type: BoutReal
+neoclass_correction_factor = -1		# type: BoutReal
+not_n_force = false		# type: bool
+not_p_force = false		# type: bool
+parallel_advection_damping = 3		# type: int
+parallel_conduction = 1		# type: int
+parallel_drift_wave = 1		# type: int
+parallel_dynamics = true		# type: bool
+parallel_sheath_damping = 3		# type: int
+parallel_transport = false		# type: bool
+particle_source = false		# type: bool
+perpend_heat_exchange = true		# type: bool
+perpend_hyper_diffusion = false		# type: bool
+perpend_viscous_heating = true		# type: bool
+perpendicular_dynamics = true		# type: bool
+plasma_neutral_interactions = 15		# type: int
+power_source = false		# type: bool
+prescribed_diffusion = false		# type: bool
+q = 4.2		# type: BoutReal
+qdelta_approx = 3		# type: int
+ramp_a = 2		# type: BoutReal
+ramp_peak = 50000		# type: BoutReal
+ramp_t0 = 0		# type: BoutReal
+ramp_trans = 5000		# type: BoutReal
+rampup_init_prof = 0		# type: int
+rampup_init_time = 1000		# type: BoutReal
+rampup_ti0 = false		# type: bool
+rampup_ti0_timax = 29.8		# type: BoutReal
+rampup_ti0_time = 0		# type: BoutReal
+reciprocal_approx = 3		# type: int
+right_handed_coord = false		# type: bool
+rmajor = 0.88		# type: BoutReal
+rminor = 0.225		# type: BoutReal
+save_forcing = false		# type: bool
+sol_width = (x_wall-x_lcfs)*mesh:lx
+static_plasma = 0		# type: int
+te0 = 29.8		# type: BoutReal
+te_bck = 0		# type: BoutReal
+test_blob = false		# type: bool
+test_blob_use_gen_vort = false		# type: bool
+test_laplace = false		# type: bool
+test_vort_cross_term = false		# type: bool
+ti0 = 29.8		# type: BoutReal
+ti_bck = 0		# type: BoutReal
+ti_over_te = 3		# type: int
+wall_amp = 8
+x_lcfs = 0.40		# type: BoutReal
+x_wall = 0.80		# type: BoutReal
+xr = mesh:xl - edge_width
+z = 1		# type: BoutReal
+z_eff = 1.2		# type: BoutReal
+
+[init_n]
+function = 0.5 * (n_inner - n_bg) * (1 - tanh( (hesel:xr - x_shift_n)/step_width)) + n_bg		# type: string
+n_bg = 0.1
+n_inner = 1.5
+scale = 1.0		# type: BoutReal
+step_width = 10.
+x_shift_n = 2.93794
+
+[init_neutrals]
+ncold_init = 1e-3*exp(x-1)
+nhot_init = 1e-3
+nwarm_init = 1e-3
+
+[init_pe]
+edge_prof = 1 - line_slope * sigma_closed:function * hesel:xr
+function = (0.5 *(sqrt(pe_inner) - pe_bg) * (1 - tanh( (hesel:xr - x_shift_pe)/step_width)) + pe_bg) * edge_prof		# type: string
+line_slope = (sqrt(pe_inner)-1)/hesel:edge_width
+pe_bg = 0.01
+pe_inner = 9.0
+scale = 1.0		# type: BoutReal
+step_width = 10.
+x_shift_pe = -3.51585
+
+[init_pi]
+edge_prof = 1 - line_slope * sigma_closed:function * hesel:xr
+function = (0.5 *(sqrt(pi_inner) - pi_bg) * (1 - tanh( (hesel:xr - x_shift_pi)/step_width)) + pi_bg) * edge_prof		# type: string
+line_slope = (sqrt(pi_inner)-1)/hesel:edge_width
+pi_bg = 0.01
+pi_inner = 9.0
+scale = 1.0		# type: BoutReal
+step_width = 10.
+x_shift_pi = -3.51585
+
+[input]
+transform_from_field_aligned = true		# type: bool
+
+[kinetic_neutrals]
+dt_min = 1		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+flag_initialized = 0		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_atom_injection_rate = 0		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_atom_n_max = 100000		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_atom_temperature = 1		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_molecule_injection_rate = 1e+9		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_molecule_n_max = 500000		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+h_molecule_temperature = 0.3		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+init_source_time = 1		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+min_weight_atom = 0.01		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+phys_injection_rate_molecules = 150e+19		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+r_std_blur = 10		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+step_length = 1		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+t_wall = 0.3		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+wall_boundary_atom = 0		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+wall_boundary_molecule = 1		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+wallabsorbtionfractionatom = 0.2		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+wallabsorbtionfractionmolecule = 0.2		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+
+[laplace]
+all_terms = true		# type: bool, doc: Include first derivative terms?
+async = true		# type: bool, doc: Use asyncronous MPI send?
+dst = false		# type: bool
+extra_yguards_lower = 0		# type: int
+extra_yguards_upper = 0		# type: int
+filter = 0		# type: BoutReal, doc: Fraction of Z modes to filter out. Between 0 and 1
+global_flags = 0		# type: int
+include_yguards = false		# type: bool, doc: Solve Laplacian in Y guard cells?
+inner_boundary_flags = 0		# type: int
+low_mem = false		# type: bool
+maxmode = 256		# type: int
+nonuniform = true		# type: bool, doc: Use non-uniform grid corrections? Default is the mesh setting.
+outer_boundary_flags = 3		# type: int
+type = cyclic		# type: string
+
+[lnn]
+bndry_xin = dirichlet_o2(log(init_n:n_inner))		# type: string
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+evolve_bndry = false		# type: bool
+function = log(init_n:function+seed_n:function)		# type: string
+scale = 1.0		# type: BoutReal
+
+[lnncold]
+bndry_xin = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+bndry_xout = dirichlet_o2(log(1.))		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+function = log(init_neutrals:ncold_init)		# type: string
+scale = 1.0		# type: BoutReal
+
+[lnnhot]
+bndry_xin = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+function = log(init_neutrals:nhot_init)		# type: string
+scale = 1.0		# type: BoutReal
+
+[lnnwarm]
+bndry_xin = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+function = log(init_neutrals:nwarm_init)		# type: string
+scale = 1.0		# type: BoutReal
+
+[lnpe]
+bndry_xin = dirichlet_o2(log(init_pe:pe_inner))		# type: string
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+evolve_bndry = false		# type: bool
+function = log(init_pe:function)		# type: string
+scale = 1.0		# type: BoutReal
+
+[lnpi]
+bndry_xin = dirichlet_o2(log(init_pi:pi_inner))		# type: string
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+evolve_bndry = false		# type: bool
+function = log(init_pi:function)		# type: string
+scale = 1.0		# type: BoutReal
+
+[mesh]
+calcparallelslices_on_communicate = true		# type: bool
+dx = lx/(nx-1-2*mxg)
+dy = 1.0
+dz = lz/(nz-1)
+extrapolate_x = false		# type: bool
+extrapolate_y = false		# type: bool
+lx = 140
+lz = 140
+maxregionblocksize = 64		# type: int
+nx = 512+2*mxg
+ny = 1
+nz = 512
+paralleltransform = identity		# type: string
+staggergrids = false		# type: bool
+symmetricglobalx = true		# type: bool
+symmetricglobaly = true		# type: bool
+type = bout		# type: string
+xl = x*(lx+2*mxg*dx)
+zl = z*lz		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+
+[mesh:ddx]
+first = c2		# type: string
+flux = u1		# type: string
+second = c2		# type: string
+upwind = w3		# type: string
+
+[mesh:ddy]
+first = c2		# type: string
+flux = u1		# type: string
+second = c2		# type: string
+upwind = w3		# type: string
+
+[mesh:ddz]
+fft_filter = 0		# type: BoutReal
+first = c2		# type: string
+flux = u1		# type: string
+second = c2		# type: string
+upwind = w3		# type: string
+
+[neutrals]
+atomicionization = true		# type: bool
+chargeexchange = true		# type: bool
+dcold = 20.		# type: BoutReal
+dhot = 400.		# type: BoutReal
+dissociation = true		# type: bool
+dwarm = 50.		# type: BoutReal
+e = 1.60e-19		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+elasticcollisions = false		# type: bool
+floor_neutral_density = 1e-9		# type: BoutReal
+floor_neutral_profiles = true		# type: bool
+inputbcs = false		# type: bool
+local_diffusion = false		# type: bool
+m = 2*1.67e-27		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+molecularionization = true		# type: bool
+ncoldflux = -1e21		# type: BoutReal
+neutral_floor_time = 50		# type: BoutReal
+neutral_transport_multiplier = 1		# type: int
+neutraldynamics = 7		# type: int
+sigma = 3.53e-20		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+solve_for_helium = false		# type: bool
+subtractbackground = false		# type: bool
+t_cold = 0.025		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+t_hot = hesel:ti0		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+t_warm = 2.		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+tcold = 0.025		# type: BoutReal
+thot = 29.8		# type: BoutReal
+twarm = 2		# type: BoutReal
+unx = 0		# type: BoutReal
+uny = 0		# type: BoutReal
+unz = 0		# type: BoutReal
+v_cold_x = -750.		# type: BoutReal
+v_hot_x = -2800.		# type: BoutReal
+v_warm_x = -2000.		# type: BoutReal
+wallabsorbtionfraction = 0.2		# type: BoutReal
+
+[neutrals.lnNcold]
+evolve_bndry = false		# type: bool
+
+[neutrals.lnNhelium]
+evolve_bndry = false		# type: bool
+
+[neutrals.lnNhot]
+evolve_bndry = false		# type: bool
+
+[neutrals.lnNwarm]
+evolve_bndry = false		# type: bool
+
+[output]
+enabled = true		# type: bool
+floats = false		# type: bool
+flush = true		# type: bool
+flushfrequency = 1		# type: int
+guards = true		# type: bool
+init_missing = false		# type: bool
+openclose = true		# type: bool
+parallel = false		# type: bool
+shiftinput = false		# type: bool
+shiftoutput = false		# type: bool
+
+[restart]
+enabled = true		# type: bool
+floats = false		# type: bool
+flush = true		# type: bool
+flushfrequency = 1		# type: int
+guards = true		# type: bool
+init_missing = false		# type: bool
+openclose = true		# type: bool
+parallel = false		# type: bool
+shiftinput = false		# type: bool
+shiftoutput = false		# type: bool
+
+[run]
+finished = Tue Apr 22 01:15:34 2025
+		# not used , from: 
+revision = fd0b0e3e52c5934d3f94ac129e95f14b7220afb3		# not used , from: 
+started = Mon Apr 21 08:51:34 2025
+		# not used , from: 
+version = 4.3.2		# not used , from: 
+
+[seed_n]
+function = pert_amp*(5 + mixmode(z)*mixmode(2*pi*x))		# type: string
+pert_amp = 0.001
+pert_size = 5		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+scale = 1.0		# type: BoutReal
+xaxis = mesh:xl-hesel:force_width		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+zaxis = mesh:zl-mesh:lz/2		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+
+[sigma_closed]
+function = 0.5 * (1-tanh(hesel:xr/hesel:d_lcfs))		# type: string
+scale = 1.0		# type: BoutReal
+
+[sigma_force]
+function = 0.5 * (1-tanh((mesh:xl-hesel:force_width)/hesel:d_force))		# type: string
+scale = 1.0		# type: BoutReal
+
+[sigma_open]
+function = 0.5 * (1+tanh(hesel:xr/hesel:d_lcfs)) + hesel:wall_amp*0.5 * (1+tanh((hesel:xr-hesel:sol_width)/hesel:d_wall))		# type: string
+scale = 1.0		# type: BoutReal
+
+[solver]
+atol = 1.0e-10		# type: BoutReal
+is_nonsplit_model_diffusive = true		# type: bool, doc: If not a split operator, treat RHS as diffusive?
+mldq = 80		# type: int
+mlkeep = 0		# type: int
+mms = false		# type: bool
+mms_initialise = false		# type: bool
+monitor_timestep = false		# type: bool
+mudq = 80		# type: int
+mukeep = 0		# type: int
+mxstep = 1000000		# type: int
+nout = 91		# type: int, doc: Number of output steps. Overrides global setting.
+output_step = 100		# type: BoutReal, doc: Output time step size. Overrides global TIMESTEP setting.
+precon_dimens = 50		# type: int
+precon_tol = 0.0001		# type: BoutReal
+rtol = 1.0e-5		# type: BoutReal
+timestep = 1.		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+type = pvode		# type: string
+use_precon = false		# type: bool
+
+[vort]
+bndry_xin = dirichlet_o2(0.)		# type: string
+bndry_xout = neumann_o2(0.)		# not used , from: /home/alec/sophia_data/tcv/76142/./run/1e21//BOUT.inp
+evolve_bndry = false		# type: bool
+function = 0.		# type: string
+scale = 1.0		# type: BoutReal
