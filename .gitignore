@@ -1,3 +1,4 @@
 data/*
 Data_Files/*
 data_numpy/density_large_rolled128.npy
+__pycache__/
