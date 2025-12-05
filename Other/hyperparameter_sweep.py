@@ -26,7 +26,6 @@ else:
     print("CUDA not available. Using CPU.")
 
 # Assume imports from notebook are available
-# (Run this in the same directory as main.ipynb)
 DATA_LOCATION = Path("data_numpy/density_large128.npy")
 
 # Load and prepare data (same as notebook)
@@ -50,7 +49,7 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}\n")
 
-# Define models with configurable dropout (simplified version)
+
 class ReparameterizedDiagonalGaussian(torch.distributions.Distribution):
     def __init__(self, mu: torch.Tensor, log_sigma: torch.Tensor):
         assert mu.shape == log_sigma.shape
@@ -250,7 +249,7 @@ for latent_dim in latent_dims:
             }
         )
 
-# Print results table
+
 print("\n\n" + "=" * 70)
 print("HYPERPARAMETER SWEEP RESULTS")
 print("=" * 70)

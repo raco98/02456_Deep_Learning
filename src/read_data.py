@@ -8,8 +8,8 @@ Created on Mon Nov 11 14:14:28 2024
 from matplotlib import pyplot as plt
 from boutdata import collect
 
-path = "D:/test/T_100"
-
+path = "D:/test/T_100" # Configure path
+ 
 n = collect('n', path = path)
 n = n.squeeze()
 
